@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Tjslp.CredentialManager;
 
@@ -80,6 +81,7 @@ public sealed partial class ServeCommand : ICommand
                 options.Authority = Oidc;
                 options.ClientId = OidcId;
                 options.ClientSecret = OidcSecret;
+                options.ResponseType = OpenIdConnectResponseType.Code;
                 options.GetClaimsFromUserInfoEndpoint = true;
                 options.Scope.Add("profile");
                 options.Scope.Add("groups");
