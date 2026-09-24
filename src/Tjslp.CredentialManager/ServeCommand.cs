@@ -35,7 +35,7 @@ public sealed partial class ServeCommand : ICommand
     [CommandOption("oidc-id")]
     public required string OidcId { get; set; }
 
-    [CommandOption("oidc-secret", EnvironmentVariable = "CM_OIDC_SECRET")]
+    [CommandOption("oidc-secret", EnvironmentVariable = "CREDENTIAL_MANAGER_ARGUMENT_OIDC_SECRET")]
     public required string OidcSecret { get; set; }
 
     [CommandOption("oidc-ca")]

@@ -51,10 +51,10 @@ dotnet run --project src/Tjslp.CredentialManager -- \
 | `--administrator` | 管理员所属的 Dex `groups` 名（只支持一个），必填 |
 | `--oidc` | OIDC authority（Dex 地址），必填 |
 | `--oidc-id` | OIDC client id，必填 |
-| `--oidc-secret` | OIDC client secret，必填。也可用环境变量 `CM_OIDC_SECRET` 提供 |
+| `--oidc-secret` | OIDC client secret，必填。也可用环境变量 `CREDENTIAL_MANAGER_ARGUMENT_OIDC_SECRET` 提供 |
 | `--oidc-ca` | OIDC CA 证书（PEM），可选；提供时用于自建信任链校验 OIDC 服务端证书 |
 
-> 敏感值（如 client secret）建议通过环境变量 `CM_OIDC_SECRET` 传入，避免出现在命令行历史 / 进程列表中。
+> 敏感值（如 client secret）建议通过环境变量 `CREDENTIAL_MANAGER_ARGUMENT_OIDC_SECRET` 传入，避免出现在命令行历史 / 进程列表中。
 
 ## 下游协议
 
