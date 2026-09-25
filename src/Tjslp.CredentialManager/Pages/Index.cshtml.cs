@@ -14,6 +14,8 @@ public sealed class IndexModel : PageModel
 
     public string Owner => User.FindFirstValue(ClaimTypes.NameIdentifier)!;
 
+    public string UserName => User.FindFirstValue(ClaimTypes.Name) ?? Owner;
+
     public string Title => appOptions.Title;
 
     public IReadOnlyList<(string CredentialId, string Alias, string Owner, DateTimeOffset? Expire)> Credentials { get; private set; }
