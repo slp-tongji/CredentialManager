@@ -3,6 +3,7 @@ using Tjslp.CredentialManager.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Diagnostics;
 
 namespace Tjslp.CredentialManager.Pages;
 
@@ -12,7 +13,15 @@ public sealed class IndexModel : PageModel
     private readonly AppOptions appOptions;
     private readonly CredentialService credentialService;
 
-    public string Owner => User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+    public string Owner
+    {
+        get
+        {
+            var result = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Trace.Assert(result is not null);
+            return result;
+        }
+    }
 
     public string UserName => User.FindFirstValue("name") ?? Owner;
 
