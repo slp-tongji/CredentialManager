@@ -105,7 +105,7 @@ public sealed partial class ServeCommand : ICommand
                 // 默认行为（500），便于排查真正的问题。
                 options.Events.OnRemoteFailure = context =>
                 {
-                    if (context.Failure?.InnerException is SecurityTokenSignatureKeyNotFoundException)
+                    if (context.Failure is SecurityTokenSignatureKeyNotFoundException)
                     {
                         context.HandleResponse();
                         context.Response.Redirect("/Account/Login");
