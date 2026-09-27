@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Tjslp.CredentialManager;
 
@@ -87,6 +88,15 @@ public sealed partial class ServeCommand : ICommand
                 options.Scope.Add("groups");
                 options.CorrelationCookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
                 options.NonceCookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                options.Events.OnRemoteFailure = context =>
+                {
+                    if (context.Failure?.InnerException is SecurityTokenSignatureKeyNotFoundException)
+                    {
+                        context.HandleResponse();
+                        context.Response.Redirect("/Account/Login");
+                    }
+                    return Task.CompletedTask;
+                };
 
                 if (OidcCa is not null)
                 {
